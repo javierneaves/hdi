@@ -1,6 +1,7 @@
 import { showMailForm } from "./formMail.js";
 import { catalogYear } from "./catalogo.js";
 import { data } from "./formData.js";
+import { formDataRequired } from "./reqData.js"
 
 export function formAuto(formData) {
   // Habilita el boton de progress del coche
@@ -26,7 +27,7 @@ export function formAuto(formData) {
       );
 
       // Crear los formularios y asignar los datos del año al dropdown
-      let year = !formData.year ? "" : formData.year;
+      let year = !formData.year ? "" : ""; // formData.year
       let brand = !formData.brand ? "" : formData.brand;
       let model = !formData.model ? "" : formData.model;
       let version = !formData.version ? "" : formData.version;
@@ -205,6 +206,7 @@ export function formAuto(formData) {
       botonAnterior.className = "btn btn-secondary btn-lg m-2";
       botonAnterior.textContent = "Anterior";
 
+      // crea el boton siguiente pero no lo muestra
       var botonSiguiente = document.createElement("button");
       botonSiguiente.setAttribute("type", "button");
       botonSiguiente.className = "btn btn-primary btn-lg m-2 disable";
@@ -212,7 +214,6 @@ export function formAuto(formData) {
 
       // Agregar los botones al tercer div
       divBotones.appendChild(botonAnterior);
-      divBotones.appendChild(botonSiguiente);
 
       // Agregar el tercer div al formulario
       formulario.appendChild(divBotones);
@@ -232,22 +233,20 @@ export function formAuto(formData) {
         showMailForm("active", formData);
       });
 
-      botonSiguiente.addEventListener("click", function (e) {
-        // Guardar los valores ingresados en el formulario
-        formData = {
-          ...formData,
-          year: selectYear.value,
-          brand: selectBrand.value,
-          model: selectModel.value,
-          version: selectVersion.value,
-        };
-      });
-			
+      // Creamos la alerta
+      var alert = document.createElement("div");
+      alert.setAttribute("role", "alert");
+			alert.innerHTML = ""
 			// hacemos global la variable para que se pueda usar en otros select
 			let marcaUnica = []
 
       selectYear.addEventListener("change", function (e) {
-				// primero reset de los valores ya cargados en marca, modelo y version
+        // borramos la alert
+
+        alert.textContent = ''
+        alert.className = ''
+				divBotones.style.display = false
+        // primero reset de los valores ya cargados en marca, modelo y version
 				selectBrand.innerHTML = ''
 				selectModel.innerHTML = ''
 				selectVersion.innerHTML = ''
@@ -287,7 +286,11 @@ export function formAuto(formData) {
       });
 
       selectBrand.addEventListener('change', function (e) {
-				console.log('select brand changed');
+				// borramos la alert
+
+        alert.textContent = ''
+        alert.className = ''
+				divBotones.style.display = false
 				// primero reset de los valores ya cargados en modelo y version
 				selectModel.innerHTML = ''
 				selectVersion.innerHTML = ''
@@ -330,7 +333,11 @@ export function formAuto(formData) {
 			});
 
 			selectModel.addEventListener('change', function (e) {
-				console.log('select model changed');
+				// borramos la alert
+
+        alert.textContent = ''
+        alert.className = ''
+				divBotones.style.display = false
 				// primero reset de los valores ya cargados en modelo y version
 				selectVersion.innerHTML = ''
 				
@@ -371,7 +378,46 @@ export function formAuto(formData) {
 					option.textContent = modelUnica[i];
 					selectVersion.appendChild(option);
 				}
+
+       
+
 			});
+
+      selectVersion.addEventListener('change', function (e) {
+        // borramos la alert
+
+        alert.textContent = ''
+        alert.className = ''
+				
+         if(e.target.value === ""){
+          botonSiguiente.disabled = true
+         } else {
+
+          divBotones.appendChild(botonSiguiente);
+ 
+         botonSiguiente.addEventListener("click", function (e) {
+          if(selectVersion.value === ""){
+            
+            alert.textContent = "Favor de completar todos los campos!";
+            alert.className = "alert alert-danger  mt-2";
+            divBotones.appendChild(alert)
+            return
+          }
+           // Guardar los valores ingresados en el formulario
+           formData = {
+             ...formData,
+             year: selectYear.value,
+             brand: selectBrand.value,
+             model: selectModel.value,
+             version: selectVersion.value,
+           };
+           formDataRequired(formData)
+           console.log(formData);
+         });
+         }
+         
+         
+      });
     
     
 }
