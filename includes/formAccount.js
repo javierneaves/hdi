@@ -4,6 +4,7 @@ import { auth, app } from './firebase.js'
 import { formName } from "./formName.js";
 import { formAuto } from "./formAuto.js";
 import { loadingEnd, loadingStart } from "./loading.js";
+import { showMessages } from "./showMessages.js";
 
 export function formAuth(active, formData) {
   loadingEnd()
@@ -156,13 +157,7 @@ export function formAuth(active, formData) {
       event.preventDefault();
       var email = emailInput.value;
       var password = passwordInput.value;
-
-      // Validar el formulario (puedes agregar más validaciones si es necesario)
-      if (password.length < 6) {
-          console.log('El password debe ser de 6 o más dígitos');
-          return;
-      }
-
+     
       //  codigo para registraste con mail de firebase auth
       try{
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
@@ -170,19 +165,29 @@ export function formAuth(active, formData) {
           loadingStart()
           formAuto(formData);
         }).catch( (error) => {
-         console.log(error);
+          console.log(error);
+          if(error.code === 'auth/email-already-in-use'){
+            showMessages('El usuario ya existe', 'error')
+          } else if( error.code === 'auth/invalid-email'){
+              showMessages('Ingrese un correo valido', 'error')
+          } else if( error.code === 'auth/weak-password') {
+              showMessages('Ingrese un password mayor a 6 caracteres', 'error')
+          } else if(error.code === 'auth/internal-error'){
+            showMessages('Debe ingresar una contraseña válida', 'error')
+          } else if(error.code){
+              showMessages('Algo salio mal, intentelo de nuevo','error')
+          }
         })
 
      } catch (error){
          if(error.code === 'auth/email-already-in-use'){
-             showMessages('El usuario ya existe', 'xxxx')
-             
+             showMessages('El usuario ya existe', 'error')
          } else if( error.code === 'auth/invalid-email'){
-             showMessages('Ingrese un correo valido', 'xxxx')
+             showMessages('Ingrese un correo valido', 'error')
          } else if( error.code === 'auth/weak-password') {
-             showMessages('Ingrese un password mayor a 6 caracteres', 'xxxx')
+             showMessages('Ingrese un password mayor a 6 caracteres', 'error')
          } else if(error.code){
-             showMessages('Algo salio mal','xxxxx')
+             showMessages('Algo salio mal, intentelo de nuevo','error')
          }
      }
   });
