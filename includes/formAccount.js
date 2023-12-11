@@ -117,15 +117,8 @@ export function formAuth(active, formData) {
   botonAnterior.className = "btn btn-secondary btn-lg m-2";
   botonAnterior.textContent = "Anterior";
 
-  var botonSiguiente = document.createElement("button");
-  botonSiguiente.setAttribute("type", "button");
-  botonSiguiente.className = "btn btn-primary btn-lg m-2 disable";
-  botonSiguiente.textContent = "Siguiente";
-	botonSiguiente.disabled =  !active ?  true : false;
-
   // Agregar los botones al tercer div
   divButtons.appendChild(botonAnterior);
-  divButtons.appendChild(botonSiguiente);
 
   // Agregar el el formulario de registro al formulario
   formulario.appendChild(container);
@@ -152,17 +145,7 @@ export function formAuth(active, formData) {
     formName("active", formData);
   });
 
-  botonSiguiente.addEventListener("click", function (e) {
-    // guarda los valores de los formularios en el objeto
-    formData = {
-      ...formData,
-      mail: emailInput.value,
-    };
-    formAuto(formData);
-  });
-
   // auth
-  
   
   // Obtener referencias a los elementos del formulario
   var emailInput = document.getElementById('email');
@@ -184,8 +167,8 @@ export function formAuth(active, formData) {
       try{
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
-          botonSiguiente.className = "btn btn-primary btn-lg m-2";
-          botonSiguiente.disabled = false;
+          loadingStart()
+          formAuto(formData);
         }).catch( (error) => {
          console.log(error);
         })
@@ -214,8 +197,8 @@ export function formAuth(active, formData) {
         // ejecutar el código en onAuthStateChanged
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                botonSiguiente.className = "btn btn-primary btn-lg m-2";
-                botonSiguiente.disabled = false;
+                loadingStart()
+                formAuto(formData);
             } else {
                 console.log('No hay usuario autenticado');
                 return;
