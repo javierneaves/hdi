@@ -3,8 +3,9 @@ import { formAuth } from "./formAccount.js";
 import { catalogYear } from "./catalogo.js";
 import { data } from "./formData.js";
 import { formDataRequired } from "./reqData.js"
-
+import { loadingEnd, loadingStart } from "./loading.js";
 export function formAuto(formData) {
+  loadingEnd()
   // Habilita el boton de progress del coche
   let carProgressIcon = document.getElementById("carProgressIcon");
   let modelosUnicos;
@@ -21,7 +22,6 @@ export function formAuto(formData) {
         for (let i = 1973; i <= 2024; i++) {
           modelosLlave.push(String(i));
         }
-   
       // Filtrar valores únicos utilizando Set (modelos es el año) USA ESE ARRAY PARA EL DROP DOWN DE YEAR
       modelosUnicos = modelosLlave.filter(
         (valor, indice, array) => array.indexOf(valor) === indice
@@ -201,38 +201,16 @@ export function formAuto(formData) {
       var divBotones = document.createElement("div");
       divBotones.className = "container p-5 justify-content-between text-end";
 
-      // Crear los botones Anterior y Siguiente
-      var botonAnterior = document.createElement("button");
-      botonAnterior.setAttribute("type", "button");
-      botonAnterior.className = "btn btn-secondary btn-lg m-2";
-      botonAnterior.textContent = "Anterior";
-
       // crea el boton siguiente pero no lo muestra
       var botonSiguiente = document.createElement("button");
       botonSiguiente.setAttribute("type", "button");
       botonSiguiente.className = "btn btn-primary btn-lg m-2 disable";
       botonSiguiente.textContent = "Siguiente";
 
-      // Agregar los botones al tercer div
-      divBotones.appendChild(botonAnterior);
-
       // Agregar el tercer div al formulario
       formulario.appendChild(divBotones);
 
-      // Fucniones de los botones
-
-      botonAnterior.addEventListener("click", function (e) {
-        // Guarda los valores que se hayan ingresado en el formulario
-        formData = {
-          ...formData,
-          year: selectYear.value,
-          brand: selectBrand.value,
-          model: selectModel.value,
-          version: selectVersion.value,
-        };
-
-        formAuth("active", formData);
-      });
+      // Funciones de los botones
 
       // Creamos la alerta
       var alert = document.createElement("div");
