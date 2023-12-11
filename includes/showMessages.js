@@ -1,6 +1,6 @@
 export function showMessages(messages, type='success') {
   if(type === 'success'){
-    showMailForm.fire({
+    Swal.fire({
       text: messages,
       icon: type,
       timer: 1500,

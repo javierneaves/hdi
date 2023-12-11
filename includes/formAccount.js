@@ -1,5 +1,10 @@
-import { GoogleAuthProvider, signInWithPopup  } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js"
-import { onAuthStateChanged, createUserWithEmailAndPassword, getAuth, updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+import { onAuthStateChanged, 
+         createUserWithEmailAndPassword, 
+         getAuth, 
+         updateProfile,
+         GoogleAuthProvider, 
+         signInWithPopup,
+         signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { auth, app } from './firebase.js'
 import { formName } from "./formName.js";
 import { formAuto } from "./formAuto.js";
@@ -164,10 +169,29 @@ export function formAuth(active, formData) {
         .then((userCredentials) => {
           loadingStart()
           formAuto(formData);
-        }).catch( (error) => {
+        }).catch( async (error) => {
           console.log(error);
-          if(error.code === 'auth/email-already-in-use'){
-            showMessages('El usuario ya existe', 'error')
+          if(error.code === 'auth/email-already-in-use') {
+            
+            try{
+                const credentials = await signInWithEmailAndPassword(auth, email, password)
+                console.log(credentials.user.email)
+                formAuto(formData);
+                showMessages('Welcome '+ credentials.user.email, 'success')
+                return
+            }catch(error) {
+                console.log(error)
+                if(error.code === 'auth/wrong-password'){
+                    showMessages('Password incorrecto', 'error')
+                } else if(error.code === 'auth/user-not-found'){
+                    showMessages('Usuario no encontrado', 'error')
+                } else if(error.code === 'auth/invalid-email'){
+                    showMessages('Correo no valido', 'error')
+                } else {
+                    showMessages('Revise los datos ingresados', 'www')
+                }
+                showMessages('El usuario ya existe', 'error')
+            }
           } else if( error.code === 'auth/invalid-email'){
               showMessages('Ingrese un correo valido', 'error')
           } else if( error.code === 'auth/weak-password') {
