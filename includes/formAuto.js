@@ -1,4 +1,5 @@
 import { showMailForm } from "./formMail.js";
+import { formAuth } from "./formAccount.js";
 import { catalogYear } from "./catalogo.js";
 import { data } from "./formData.js";
 import { formDataRequired } from "./reqData.js"
@@ -230,7 +231,7 @@ export function formAuto(formData) {
           version: selectVersion.value,
         };
 
-        showMailForm("active", formData);
+        formAuth("active", formData);
       });
 
       // Creamos la alerta

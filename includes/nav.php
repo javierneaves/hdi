@@ -1,5 +1,16 @@
 <main>
-    
+    <style>
+      #loading{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:10000;
+    width:100vw;
+    height:100vh;
+    background-color: rgba(0,0,0,0.9)
+  
+  }
+    </style>
     <a class="navbar-brand" href="#"></a>
     <nav class="navbar navbar-expand-lg bg-body-primary bg-secondary">
       <div class="container-fluid">
@@ -65,8 +76,21 @@
         </div>
       </div>
     </nav>
-    
-    
+
+    <div id="loading" class="d-flex justify-content-center align-items-center invisible">
+      <div class="text-center">
+          <img src="./imgs/logohdigreenrbg.png" alt="logo">
+          <br></br>
+          <div class='d-flex align-items-center container'>
+            <div>
+              <h5 class='text-light'>Estamos validando la información</h5>
+            </div>
+          </div>
+          <div class="spinner-border text-light" >
+          <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
+    </div>  
     
     <h1 class="text-primary text-center p-4">Cotiza tu seguro de auto</h1>
     <div class="container justify-content-between mt-5">

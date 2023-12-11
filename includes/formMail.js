@@ -15,7 +15,7 @@ export function showMailForm(active, formData) {
   formDescription.innerHTML =
     'Muchas gracias <span class="text-primary">' +
     formData.nombre +
-    "</span>. <br /><br /> Compártenos tus datos de contacto, estos son necesarios para poder generar tu cotización y enviar la póliza a tu correo.";
+    "</span>. <br /><br /> Ahora crearemos tu cuenta, podras acceder a tu información en cualquier momento.";
 
   var formulario = document.getElementById("contactForm");
   formulario.innerHTML = "";

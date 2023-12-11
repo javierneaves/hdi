@@ -1,9 +1,13 @@
 import {showMailForm} from './formMail.js'
+import { formAuth } from './formAccount.js';
 import { formAuto } from './formAuto.js'
+import { loadingEnd, loadingStart } from './loading.js';
 
 formName()
 
 export function formName(active, formData) {
+    let formDescription = document.getElementById('formDescription');
+    formDescription.innerHTML = 'Para comenzar compártenos tus datos, estos son necesarios para poder generar tu cotización y contratación si así lo deseas.'
     let testData = !formData ? 'no data' : formData
     console.log(testData);
     var form = document.getElementById("contactForm");
@@ -16,7 +20,7 @@ export function formName(active, formData) {
     var labelNombre = document.createElement("label");
     labelNombre.setAttribute("for", "nombre");
     labelNombre.classList.add("form-label", "fw-bold", "text-body-secondary");
-    labelNombre.innerText = "Nombres";
+    labelNombre.innerText = "Nombre";
 
     // Crear input para Nombre
     var inputNombre = document.createElement("input");
@@ -95,7 +99,11 @@ export function formName(active, formData) {
                 alert.textContent = ''
                 alert.className = ''
             });
-
+            // Agregar temporizador para borrar la alerta después de 1 segundo
+            setTimeout(function() {
+                alert.textContent = '';
+                alert.className = '';
+            }, 500);
         } else if (!e.target.value){
             boton.disabled = true;
             alert.textContent = ''
@@ -133,14 +141,16 @@ export function formName(active, formData) {
             inputNombre.className = "form-control border-danger"
             return
         } else {
+            loadingStart()
+
             formData = {  
                 ...formData,
                 nombre: inputNombre.value,
                 cp: inputCodigoPostal.value,
             }
             
-
-            showMailForm("", formData)
+            validateZip(formData)
+            
             
         }
     });
@@ -150,3 +160,41 @@ export function formName(active, formData) {
     
   }
 
+  function validateZip(formData) {
+    console.log('access validateZip');
+    try {
+        // Crear objeto XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        var url = "./phpRequest/getZip.php";
+
+        // Configurar la solicitud
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Convertir el objeto a formato de cadena URL
+        var formDataString = Object.keys(formData).map(function(key) {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
+        }).join('&');
+
+        // Manejar la respuesta del servidor
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText); // Muestra la respuesta en la consola del navegador
+                    // Puedes hacer más cosas con la respuesta aquí
+                } else {
+                    console.error('Error en la solicitud:', xhr.status);
+                }
+
+                // Resto de la configuración de la solicitud...
+                formAuth("", formData);
+                loadingEnd();
+            }
+        };
+
+        // Enviar la solicitud con los datos del formulario
+        xhr.send(formDataString);
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
+}
