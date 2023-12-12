@@ -11,6 +11,7 @@ let versionObject = {
   'v1.01.04' : 'Agrego Sweet Alert, se crea showMessages, se valida formulario de correo y password con google Auth',
   'v1.01.05' : 'Si ya existe el correo, te lleva a autos directo',
   'v1.01.06' : 'Agrego loadingEnd y quitamos el boton de anterior',
-  'V1.01.08' : 'Sync con Sime PC'
+  'V1.01.08' : 'Sync con Sime PC',
+  'V1.01.09' : 'Remove db from index.php'
 }
  
