@@ -225,8 +225,16 @@ export function formAuth(active, formData) {
         // Después de que la autenticación con Google sea exitosa,
         // ejecutar el código en onAuthStateChanged
         onAuthStateChanged(auth, async (user) => {
+          const uid = user.uid;
+          const correo = user.email;
             if (user) {
                 loadingStart()
+                console.log(uid);
+                formData = {  
+                  ...formData,
+                  uid: uid,
+                  correo: correo
+                }
                 formAuto(formData);
             } else {
                 console.log('No hay usuario autenticado');

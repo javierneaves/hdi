@@ -12,6 +12,7 @@ let versionObject = {
   'v1.01.05' : 'Si ya existe el correo, te lleva a autos directo',
   'v1.01.06' : 'Agrego loadingEnd y quitamos el boton de anterior',
   'V1.01.08' : 'Sync con Sime PC',
-  'V1.01.09' : 'Remove db from index.php'
+  'V1.01.09' : 'Remove db from index.php',
+  'V1.01.10' : 'se guarda en el objeto formData el usuario obtenido despues del registro con Google para relacionarlo con los datos',
 }
  
