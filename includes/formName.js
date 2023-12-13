@@ -165,7 +165,7 @@ export function formName(active, formData) {
     try {
         // Crear objeto XMLHttpRequest
         var xhr = new XMLHttpRequest();
-        var url = "./phpRequest/getZip.php";
+        var url = "./phpRequest/getVehicleType.php";
 
         // Configurar la solicitud
         xhr.open("POST", url, true);
