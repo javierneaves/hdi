@@ -166,8 +166,25 @@ export function formAuth(active, formData) {
       //  codigo para registraste con mail de firebase auth
       try{
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
+        // Despues de crear la cuenta inicia la pantalla de loading, guarda el objeto con los datos, abre formAuto
         .then((userCredentials) => {
           loadingStart()
+          onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                loadingStart()
+                console.log(uid);
+                formData = {  
+                  ...formData,
+                  correo: email
+                }
+                formAuto(formData);
+            } else {
+                console.log('No hay usuario autenticado');
+                return;
+            }
+          }).catch(async (error) =>{
+            console.log(error);
+          })
           formAuto(formData);
         }).catch( async (error) => {
           console.log(error);
@@ -215,32 +232,36 @@ export function formAuth(active, formData) {
          }
      }
   });
-
+  
   googleButton.addEventListener('click', async () => {
     const provider = new GoogleAuthProvider()
     try {
-        const credentials = await signInWithPopup(auth, provider);
-        console.log(credentials);
+        const credentials = await signInWithPopup(auth, provider)
+        .then((credentials) =>{
+          console.log(credentials);
+          // Después de que la autenticación con Google sea exitosa,
+          // ejecutar el código en onAuthStateChanged
+          onAuthStateChanged(auth, async (user) => {
+            const uid = user.uid;
+            const correo = user.email;
+              if (user) {
+                  loadingStart()
+                  console.log(uid);
+                  formData = {  
+                    ...formData,
+                    uid: uid,
+                    correo: correo
+                  }
+                  formAuto(formData);
+              } else {
+                  console.log('No hay usuario autenticado');
+                  return;
+              }
+          }).catch(async (error) =>{
+            console.log(error);
+          })
 
-        // Después de que la autenticación con Google sea exitosa,
-        // ejecutar el código en onAuthStateChanged
-        onAuthStateChanged(auth, async (user) => {
-          const uid = user.uid;
-          const correo = user.email;
-            if (user) {
-                loadingStart()
-                console.log(uid);
-                formData = {  
-                  ...formData,
-                  uid: uid,
-                  correo: correo
-                }
-                formAuto(formData);
-            } else {
-                console.log('No hay usuario autenticado');
-                return;
-            }
-        });
+        })
 
     } catch (error) {
         console.log(error);
