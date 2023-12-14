@@ -15,6 +15,7 @@ let versionObject = {
   'V1.01.09' : 'Remove db from index.php',
   'V1.01.10' : 'se guarda en el objeto formData el usuario obtenido despues del registro con Google para relacionarlo con los datos',
   'V1.01.11' : 'Agrego php getVehicleType, no se completó la requi',
-  'V1.01.12' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email'
+  'V1.01.12' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email',
+  'V1.01.12.001' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email, corrige catch error'
 }
  
