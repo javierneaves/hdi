@@ -172,7 +172,6 @@ export function formAuth(active, formData) {
           onAuthStateChanged(auth, async (user) => {
             if (user) {
                 loadingStart()
-                console.log(uid);
                 formData = {  
                   ...formData,
                   correo: email
@@ -182,8 +181,6 @@ export function formAuth(active, formData) {
                 console.log('No hay usuario autenticado');
                 return;
             }
-          }).catch(async (error) =>{
-            console.log(error);
           })
           formAuto(formData);
         }).catch( async (error) => {
