@@ -151,7 +151,6 @@ export function formName(active, formData) {
             
             validateZip(formData)
             
-            
         }
     });
     
@@ -159,6 +158,7 @@ export function formName(active, formData) {
 
     
   }
+  
 
   function validateZip(formData) {
     console.log('access validateZip');

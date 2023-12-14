@@ -254,8 +254,6 @@ export function formAuth(active, formData) {
                   console.log('No hay usuario autenticado');
                   return;
               }
-          }).catch(async (error) =>{
-            console.log(error);
           })
 
         })

@@ -16,6 +16,7 @@ let versionObject = {
   'V1.01.10' : 'se guarda en el objeto formData el usuario obtenido despues del registro con Google para relacionarlo con los datos',
   'V1.01.11' : 'Agrego php getVehicleType, no se completó la requi',
   'V1.01.12' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email',
-  'V1.01.12.001' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email, corrige catch error'
+  'V1.01.12.001' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email, corrige catch error',
+  'V1.01.12.002' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con gmail, corrige catch error y actualizo en formName funcion de getZip editada por Alex',
 }
  
