@@ -18,6 +18,7 @@ let versionObject = {
   'V1.01.12' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email',
   'V1.01.12.001' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con email, corrige catch error',
   'V1.01.12.002' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con gmail, corrige catch error y actualizo en formName funcion de getZip editada por Alex',
-  'V1.01.13' : 'Cambio formData a un objeto JSON'
+  'V1.01.13' : 'Cambio formData a un objeto JSON',
+  'V1.01.14' : 'agrego filtro por tipo de vehiculo al dar click al boton de vehiculo',
 }
  
