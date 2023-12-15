@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 include 'db_connection.php';
 
 // Obtener el valor de la variable desde la URL
-$valorDado = ' ' . trim($_GET['valor']) . ' ';
+$valorDado = $_GET['valor'];
 
 // Consulta SQL para obtener todos los registros de la tabla "vehiculos"
 $sql = "SELECT modeloLlave FROM vehiculos WHERE idTipoVehiculoClave = '$valorDado'";

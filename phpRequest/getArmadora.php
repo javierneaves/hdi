@@ -5,11 +5,13 @@ header('Content-Type: application/json');
 include 'db_connection.php';
 
 // Obtener el valor de la variable desde la URL
-$valorDado = $_GET['valor'];
+$tipo = $_GET['tipo'];
 $modelo = $_GET['modelo'];
+$marca = $_GET['marca'];
 
 // Consulta SQL para obtener todos los registros de la tabla "vehiculos"
-$sql = "SELECT * FROM vehiculos WHERE idTipoVehiculoClave = '$valorDado' AND modeloLlave = '$modelo'";
+$sql = "SELECT * FROM vehiculos WHERE idTipoVehiculoClave = '$tipo' AND modeloLlave = '$modelo' AND marcaClave = '$marca'";
+//$sql = "SELECT * FROM vehiculos WHERE idTipoVehiculoClave = ' 3829 ' AND modeloLlave = ' 1973 ' AND armadoraClave = 'PANEL'";
 $result = $conn->query($sql);
 
 // Verificar si se obtuvieron resultados
