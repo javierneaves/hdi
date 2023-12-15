@@ -20,5 +20,6 @@ let versionObject = {
   'V1.01.12.002' : 'UPDATE formAccount.js guarda el objeto despues de crear cuenta con gmail, corrige catch error y actualizo en formName funcion de getZip editada por Alex',
   'V1.01.13' : 'Cambio formData a un objeto JSON',
   'V1.01.14' : 'agrego filtro por tipo de vehiculo al dar click al boton de vehiculo',
+  'V1.01.15' : 'Se hace conexion a bd con php, agrego consultas a mySql para tipo de vehiculo y modelo, actualizo formAuto para que busque en bd',
 }
  

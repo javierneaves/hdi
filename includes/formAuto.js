@@ -16,8 +16,7 @@ export function formAuto(formData) {
   let dataArray;
 
   // 'data' ahora contiene el arreglo de datos
-  dataArray = data.slice();
-  console.log(dataArray);
+  dataArray
   let modelosLlave = [];
 
   for (let i = 1973; i <= 2024; i++) {
@@ -222,23 +221,36 @@ export function formAuto(formData) {
   let getTipoDeVehiculo
   
   pickupButton.addEventListener("click", function (e) {
-    tipoVehiculo = "4579";
-    console.log(tipoVehiculo);
-    // Filtrar por "ID Tipo de Vehiculo Clave" igual a 4579
-    getTipoDeVehiculo = dataArray.filter(function(vehiculo) {
-      return vehiculo["ID Tipo de Vehiculo Clave"] === "4579";
-    })
-      console.log(getTipoDeVehiculo)
-  });
-
-  carButton.addEventListener("click", function (e) {
     tipoVehiculo = "3829";
     console.log(tipoVehiculo);
-    // Filtrar por "ID Tipo de Vehiculo Clave" igual a 4579
-    getTipoDeVehiculo = dataArray.filter(function(vehiculo) {
-      return vehiculo["ID Tipo de Vehiculo Clave"] === "3829";
-    })
-      console.log(getTipoDeVehiculo)
+
+    // Realizar la solicitud AJAX a get_data.php
+    fetch('phpRequest/get_data.php?valor=' + tipoVehiculo)
+      .then(response => response.json())
+      .then(dataArray => {
+        console.log('JSON obtenido:', dataArray);
+
+        // Puedes realizar más acciones con el JSON aquí si es necesario
+
+      })
+      .catch(error => console.error('Error:', error));
+  });
+
+
+  carButton.addEventListener("click", function (e) {
+    tipoVehiculo = "4579";
+    console.log(tipoVehiculo);
+
+    // Realizar la solicitud AJAX a get_data.php
+    fetch('phpRequest/get_data.php?valor=' + tipoVehiculo)
+      .then(response => response.json())
+      .then(dataArray => {
+        console.log('JSON obtenido:', dataArray);
+
+        // Puedes realizar más acciones con el JSON aquí si es necesario
+
+      })
+      .catch(error => console.error('Error:', error));
   });
 
   selectYear.addEventListener("change", function (e) {
@@ -260,31 +272,32 @@ export function formAuto(formData) {
     const yearToFilter = selectYear.value;
 
     // Filtrar objetos con el Modelo Llave igual a "YEAR"
-    const marcaFiltered = dataArray.filter(
-      (objeto) => objeto[0] === yearToFilter
-    );
+    fetch('phpRequest/getMarca.php?valor=' + tipoVehiculo + '&modelo=' + yearToFilter)
+      .then(response => response.json())
+      .then(dataArray => {
+        console.log('JSON obtenido:', dataArray);
+        // Crear un conjunto para almacenar valores únicos de marcaClave
+        const marcasUnicasSet = new Set();
 
-    // Para obtener los valores unicos de la armadora, primero creamos un array vacio
-    const marcaClave = [];
+        // Iterar sobre el dataArray y agregar valores únicos al conjunto
+        dataArray.forEach(vehiculo => {
+          marcasUnicasSet.add(vehiculo.marcaClave);
+        });
 
-    // Iteramos sobre cada objeto en el arrayde armadoraFiltered
-    marcaFiltered.forEach((objeto) => {
-      // Obtener el valor de "Armadora Clave" y agregarlo al nuevo array
-      marcaClave.push(objeto[1]);
-    });
+        // Convertir el conjunto a un array
+        const marcasUnicasArray = Array.from(marcasUnicasSet);
 
-    // Obten os valores unicos
+        console.log('Marcas únicas:', marcasUnicasArray);
 
-    marcaUnica = marcaClave.filter(
-      (valor, indice, array) => array.indexOf(valor) === indice
-    );
-
-    // Crear opciones y agregarlas al select
-    for (var i = 0; i < marcaUnica.length; i++) {
-      var option = document.createElement("option");
-      option.textContent = marcaUnica[i];
-      selectBrand.appendChild(option);
-    }
+        // Puedes realizar más acciones con el array de marcas únicas aquí si es necesario
+        // Crear opciones y agregarlas al select
+        for (var i = 0; i < marcasUnicasArray.length; i++) {
+          var option = document.createElement("option");
+          option.textContent = marcasUnicasArray[i];
+          selectBrand.appendChild(option);
+        }    
+      })
+      .catch(error => console.error('Error:', error));
   });
 
   selectBrand.addEventListener("change", function (e) {
