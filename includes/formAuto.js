@@ -365,36 +365,35 @@ export function formAuto(formData) {
     const selectBrandToFilter = selectBrand.value;
     const yearToFilter = selectYear.value;
     const modelToFilter = selectModel.value;
-
+    console.log(modelToFilter);
     // Filtrar objetos con el Modelo Llave igual a "YEAR"
-    const modelFiltered = dataArray.filter(
-      (objeto) =>
-        objeto[0] === yearToFilter &&
-        objeto[1] === selectBrandToFilter &&
-        objeto[2] === modelToFilter
-    );
+    fetch('phpRequest/getVersion.php?tipo=' + tipoVehiculo + '&modelo=' + yearToFilter + '&marca=' + selectBrandToFilter + '&armadora=' + modelToFilter)
+      .then(response => response.json())
+      .then(dataArray => {
+        console.log('JSON obtenido:', dataArray);
+        // Crear un conjunto para almacenar valores únicos de armadoraClave
+        const marcasUnicasSet = new Set();
 
-    // Para obtener los valores unicos de la armadora, primero creamos un array vacio
-    const modelClave = [];
+        // Iterar sobre el dataArray y agregar valores únicos al conjunto
+        dataArray.forEach(vehiculo => {
+          marcasUnicasSet.add(vehiculo.descripcionClave);
+        });
 
-    // Iteramos sobre cada objeto en el arrayde armadoraFiltered
-    modelFiltered.forEach((objeto) => {
-      // Obtener el valor de "Armadora Clave" y agregarlo al nuevo array
-      modelClave.push(objeto[3]);
-    });
+        // Convertir el conjunto a un array
+        const modelUnica = Array.from(marcasUnicasSet);
 
-    // Obten los valores unicos
+        console.log('Armadoras únicos:', modelUnica);
 
-    const modelUnica = modelClave.filter(
-      (valor, indice, array) => array.indexOf(valor) === indice
-    );
+        // Puedes realizar más acciones con el array de marcas únicas aquí si es necesario
+        // Crear opciones y agregarlas al select
+        for (var i = 0; i < modelUnica.length; i++) {
+          var option = document.createElement("option");
+          option.textContent = modelUnica[i];
+          selectVersion.appendChild(option);
+        }    
+      })
+      .catch(error => console.error('Error:', error));
 
-    // Crear opciones y agregarlas al select
-    for (var i = 0; i < modelUnica.length; i++) {
-      var option = document.createElement("option");
-      option.textContent = modelUnica[i];
-      selectVersion.appendChild(option);
-    }
   });
 
   selectVersion.addEventListener("change", function (e) {
