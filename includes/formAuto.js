@@ -221,6 +221,17 @@ export function formAuto(formData) {
   let getTipoDeVehiculo
   
   pickupButton.addEventListener("click", function (e) {
+    pickupButton.classList.add('border-success')
+    carButton.classList.remove('border-success')
+    pickupButton.classList.add('border', 'border-5')
+    carButton.classList.remove('border', 'border-5')
+    // primero reset de los valores ya cargados en marca, modelo y version
+    selectYear.value = ""
+    selectBrand.innerHTML = "";
+    selectModel.innerHTML = "";
+    selectVersion.innerHTML = "";
+
+    // obten el tipo de vehiculo
     tipoVehiculo = "3829";
 
     // Realizar la solicitud AJAX a get_data.php
@@ -237,6 +248,17 @@ export function formAuto(formData) {
 
 
   carButton.addEventListener("click", function (e) {
+    carButton.classList.add('border-success')
+    pickupButton.classList.remove('border-success')
+    carButton.classList.add('border', 'border-5')
+    pickupButton.classList.remove('border', 'border-5')
+    
+    // primero reset de los valores ya cargados en marca, modelo y version
+    selectYear.value = ""
+    selectBrand.innerHTML = "";
+    selectModel.innerHTML = "";
+    selectVersion.innerHTML = "";
+    // obten el tipo de vehiculo
     tipoVehiculo = "4579";
 
     // Realizar la solicitud AJAX a get_data.php

@@ -23,5 +23,6 @@ let versionObject = {
   'V1.01.15' : 'Se hace conexion a bd con php, agrego consultas a mySql para tipo de vehiculo y modelo, actualizo formAuto para que busque en bd',
   'V1.01.16' : 'Conexion a bd y filtro en marca de vehiculo, arroja y llena el Modelo dropdown',
   'V1.01.17' : 'Conexion a bd y filtro final obtiene version',
+  'V1.01.18' : 'botones de tipo vehiculos se aumenta borde al seleccionar',
 }
  
