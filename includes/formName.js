@@ -2,6 +2,8 @@ import {showMailForm} from './formMail.js'
 import { formAuth } from './formAccount.js';
 import { formAuto } from './formAuto.js'
 import { loadingEnd, loadingStart } from './loading.js';
+import { showMessages } from './showMessages.js';
+
 
 formName()
 
@@ -198,5 +200,6 @@ function validateZip(formData){
 }
 
 function handleErrors(){
+  showMessages('El codigo postal no es valido', 'warning')  
   loadingEnd();
 }

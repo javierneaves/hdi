@@ -388,7 +388,7 @@ export function formAuto(formData) {
     const yearToFilter = selectYear.value;
     const modelToFilter = selectModel.value;
     console.log(modelToFilter);
-    // Filtrar objetos con el Modelo Llave igual a "YEAR"
+    // Consulta en la base de datos la version del vehiculo
     fetch('phpRequest/getVersion.php?tipo=' + tipoVehiculo + '&modelo=' + yearToFilter + '&marca=' + selectBrandToFilter + '&armadora=' + modelToFilter)
       .then(response => response.json())
       .then(dataArray => {
@@ -436,18 +436,44 @@ export function formAuto(formData) {
           divBotones.appendChild(alert);
           return;
         }
-        // Guardar los valores ingresados en el formulario
-        formData = {
-          ...formData,
-          year: selectYear.value,
-          brand: selectBrand.value,
-          model: selectModel.value,
-          version: selectVersion.value,
-        };
         
+        getVehicleData(selectYear.value, selectBrand.value, selectModel.value, selectVersion.value)
         formDataRequired(formData);
         console.log(formData);
       });
     }
   });
+
+  
+}
+
+function getVehicleData(){
+  // Consulta en la base de datos la version del vehiculo
+  fetch('phpRequest/getVersion.php?tipo=' + tipoVehiculo + '&modelo=' + yearToFilter + '&marca=' + selectBrandToFilter + '&armadora=' + modelToFilter)
+  .then(response => response.json())
+  .then(dataArray => {
+    console.log('JSON obtenido:', dataArray);
+    // Crear un conjunto para almacenar valores únicos de armadoraClave
+    const marcasUnicasSet = new Set();
+
+    // Iterar sobre el dataArray y agregar valores únicos al conjunto
+    dataArray.forEach(vehiculo => {
+      marcasUnicasSet.add(vehiculo.descripcionClave);
+    });
+
+    // Convertir el conjunto a un array
+    const modelUnica = Array.from(marcasUnicasSet);
+
+    console.log('Armadoras únicos:', modelUnica);
+
+    // Puedes realizar más acciones con el array de marcas únicas aquí si es necesario
+    // Crear opciones y agregarlas al select
+    for (var i = 0; i < modelUnica.length; i++) {
+      var option = document.createElement("option");
+      option.textContent = modelUnica[i];
+      selectVersion.appendChild(option);
+    }    
+  })
+  .catch(error => console.error('Error:', error));
+
 }
