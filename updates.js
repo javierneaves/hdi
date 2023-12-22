@@ -25,6 +25,7 @@ let versionObject = {
   'V1.01.17' : 'Conexion a bd y filtro final obtiene version',
   'V1.01.18' : 'botones de tipo vehiculos se aumenta borde al seleccionar',
   'V1.01.19' : 'commit antes de agregar formName y getinfobyPostalCode php',
+  'V1.01.20' : 'Se actualiza formName para que valide el cp en el servidor y se logra conexion con el web service para validar cp usando getinfobyPostalCode.php',
 
 }
  

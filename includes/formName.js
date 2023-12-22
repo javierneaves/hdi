@@ -150,8 +150,7 @@ export function formName(active, formData) {
             }
             
             validateZip(formData)
-            
-            
+
         }
     });
     
@@ -159,49 +158,45 @@ export function formName(active, formData) {
 
     
   }
+  
 
-  function validateZip(formData) {
-    console.log('access validateZip');
-    try {
-        // Crear objeto XMLHttpRequest
-        var xhr = new XMLHttpRequest();
-        var url = "./phpRequest/getinfobyPostalCode.php";
+function validateZip(formData){
+  let cp = formData.cp
+  console.log(cp);
 
-        // Configurar la solicitud
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  fetch('./phpRequest/getinfobyPostalCode.php?cp=' + cp)
 
-        //Comentado por Alex 131223
-        // Convertir el objeto a formato de cadena URL
-      /*  var formDataString = Object.keys(formData).map(function(key) {
-            return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
-        }).join('&'); */
-
-        // Manejar la respuesta del servidor
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    console.log(xhr.responseText); // Muestra la respuesta en la consola del navegador
-                    // Puedes hacer más cosas con la respuesta aquí
-                } else {
-                    console.error('Error en la solicitud:', xhr.status);
-                }
-
-                // Resto de la configuración de la solicitud...
-                formAuth("", formData);
-                loadingEnd();
-            }
-        };
-
-        //Agregado por Alex 131223
-        var datosJSON = JSON.stringify(formData);
-        xhr.send(datosJSON);        
-        // Enviar la solicitud con los datos del formulario
-       // xhr.send(formDataString);
-
+  .then(async response => {
+      console.log(response.headers.get('content-type'));
+      let infoUbicaciones
+      try {
+          const jsonData = await response.json();
+          // Accede a la propiedad 'ListaInfoUbicacionesPorCodigo' y luego al array 'InfoUbicacionPorCodigo'
+          infoUbicaciones = jsonData.soap_Body.getinfoByPostalCodeResponse.getinfoByPostalCodeResult.ListaInfoUbicacionesPorCodigo.InfoUbicacionPorCodigo
+          
+          // Guarda todas las direcciones obtenidas en formData
+          formData = {  
+            ...formData,
+            zipValidation: infoUbicaciones
+          }
+          console.log(formData);
+          // Resto de la configuración de la solicitud...
+          formAuth("", formData);
+          loadingEnd();
+      } catch (error) {
+          if (response.headers.get('content-type') && response.headers.get('content-type').includes('json')) {
+              handleErrors()
+              console.error('Error al parsear JSON:', error);
+          } else {
+              console.log('La respuesta no es JSON válido. Contenido:', await response.text());
+          }
+      }
       
+      
+  } ) 
+  .catch(error => console.error('Error al obtener los datos:', error));
+}
 
-    } catch (error) {
-        console.log('Error: ' + error);
-    }
+function handleErrors(){
+  loadingEnd();
 }
