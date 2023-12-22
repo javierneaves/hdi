@@ -1,81 +1,115 @@
-<br />
-<font size="1"
-  ><table
-    class="xdebug-error xe-uncaught-exception"
-    dir="ltr"
-    border="1"
-    cellspacing="0"
-    cellpadding="1"
-  >
-    <tr>
-      <th align="left" bgcolor="#f57900" colspan="5">
-        <span
-          style="background-color: #cc0000; color: #fce94f; font-size: x-large"
-          >( ! )</span
-        >
-        Fatal error: Uncaught mysqli_sql_exception: You have an error in your
-        SQL syntax; check the manual that corresponds to your MySQL server
-        version for the right syntax to use near '3829'' AND modeloLlave =
-        ''1973'' AND armadoraClave = ''VOLKSWAGEN''' at line 1 in
-        C:\wamp64\www\hdi\phpRequest\getArmadora.php on line <i>15</i>
-      </th>
-    </tr>
-    <tr>
-      <th align="left" bgcolor="#f57900" colspan="5">
-        <span
-          style="background-color: #cc0000; color: #fce94f; font-size: x-large"
-          >( ! )</span
-        >
-        mysqli_sql_exception: You have an error in your SQL syntax; check the
-        manual that corresponds to your MySQL server version for the right
-        syntax to use near '3829'' AND modeloLlave = ''1973'' AND armadoraClave
-        = ''VOLKSWAGEN''' at line 1 in
-        C:\wamp64\www\hdi\phpRequest\getArmadora.php on line <i>15</i>
-      </th>
-    </tr>
-    <tr>
-      <th align="left" bgcolor="#e9b96e" colspan="5">Call Stack</th>
-    </tr>
-    <tr>
-      <th align="center" bgcolor="#eeeeec">#</th>
-      <th align="left" bgcolor="#eeeeec">Time</th>
-      <th align="left" bgcolor="#eeeeec">Memory</th>
-      <th align="left" bgcolor="#eeeeec">Function</th>
-      <th align="left" bgcolor="#eeeeec">Location</th>
-    </tr>
-    <tr>
-      <td bgcolor="#eeeeec" align="center">1</td>
-      <td bgcolor="#eeeeec" align="center">0.0001</td>
-      <td bgcolor="#eeeeec" align="right">363360</td>
-      <td bgcolor="#eeeeec">{main}( )</td>
-      <td
-        title="C:\wamp64\www\hdi\phpRequest\getArmadora.php"
-        bgcolor="#eeeeec"
-      >
-        ...\getArmadora.php<b>:</b>0
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#eeeeec" align="center">2</td>
-      <td bgcolor="#eeeeec" align="center">0.0028</td>
-      <td bgcolor="#eeeeec" align="right">410280</td>
-      <td bgcolor="#eeeeec">
-        <a href="http://www.php.net/mysqli.query" target="_new">query</a>(
-        <span>$query = </span
-        ><span
-          >&#39;SELECT * FROM vehiculos WHERE idTipoVehiculoClave =
-          \&#39;\&#39;3829\&#39;\&#39; AND modeloLlave =
-          \&#39;\&#39;1973\&#39;\&#39; AND armadoraClave =
-          \&#39;\&#39;VOLKSWAGEN\&#39;\&#39;&#39;</span
-        >
-        )
-      </td>
-      <td
-        title="C:\wamp64\www\hdi\phpRequest\getArmadora.php"
-        bgcolor="#eeeeec"
-      >
-        ...\getArmadora.php<b>:</b>15
-      </td>
-    </tr>
-  </table></font
->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="css/bsStyle.css" />
+    <link rel="stylesheet" href="css/text.css" />
+    <link rel="stylesheet" href="includes/progressIcons.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Row para titulo de vehiculo y botones Mensual o Anual-->
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="row col-md-12 m-2">
+            <h5>Elige el mejor paquete para tu</h5>
+          </div>
+          <div class="row text-primary m-2">
+            <h3>CHEVROLET AVEO 2012</h3>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="row m-2">
+            <h5>Tipo de pago:</h5>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="d-grid gap-2 m-2">
+                <button type="button" name="" id="" class="btn btn-primary">
+                  MENSUAL
+                </button>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-grid gap-2 m-2">
+                <button
+                  type="button"
+                  name=""
+                  id=""
+                  class="btn btn-primary disabled"
+                >
+                  ANUAL
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Row para cards de paquetes-->
+      <div class="row">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+          <!-- Card 1 -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header text-white bg-info">
+                <div class="row bg-info">
+                  <h5 class="col-8 bg-info text-center">NUEVO SEGURO</h5>
+                  <div class="col-4 bg-danger text-center">
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card 1</h5>
+                <p class="card-text">Contenido de la card 1.</p>
+              </div>
+              <div class="card-footer">Footer 1</div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Header 2</div>
+              <div class="card-body">
+                <h5 class="card-title">Card 2</h5>
+                <p class="card-text">Contenido de la card 2.</p>
+              </div>
+              <div class="card-footer">Footer 2</div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Header 3</div>
+              <div class="card-body">
+                <h5 class="card-title">Card 3</h5>
+                <p class="card-text">Contenido de la card 3.</p>
+              </div>
+              <div class="card-footer">Footer 3</div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="col">
+            <div class="card">
+              <div class="card-header">Header 4</div>
+              <div class="card-body">
+                <h5 class="card-title">Card 4</h5>
+                <p class="card-text">Contenido de la card 4.</p>
+              </div>
+              <div class="card-footer">Footer 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

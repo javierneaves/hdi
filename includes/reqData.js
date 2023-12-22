@@ -15,12 +15,12 @@ function crearInputs(nombre, valor, formData) {
     var mainDiv = document.getElementById('contactForm');  
     var divElement = document.createElement("div");
     divElement.classList.add("mb-3");
-
+    
     var labelElement = document.createElement("label");
     labelElement.setAttribute("for", nombre);
     labelElement.classList.add("form-label", "fw-bold", "text-body-secondary");
     labelElement.textContent = nombre;
-
+    
     var inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
     inputElement.classList.add("form-control", "border-secondary");
@@ -28,15 +28,16 @@ function crearInputs(nombre, valor, formData) {
     inputElement.setAttribute("placeholder", "Escribe tu " + nombre.toLowerCase());
     inputElement.setAttribute("name", nombre);
     inputElement.value = valor;
-
+    
     divElement.appendChild(labelElement);
     divElement.appendChild(inputElement);
-
+    
     mainDiv.appendChild(divElement);
     
 }
 
 export function formDataRequired(formData){
+    console.log(formData);
     document.getElementById('vehicleButton').innerHTML = "";
     // Escribe el saludo para esta pagina
     let formDescription = document.getElementById("formDescription");

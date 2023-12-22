@@ -444,6 +444,7 @@ export function formAuto(formData) {
           model: selectModel.value,
           version: selectVersion.value,
         };
+        
         formDataRequired(formData);
         console.log(formData);
       });

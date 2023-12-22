@@ -24,5 +24,7 @@ let versionObject = {
   'V1.01.16' : 'Conexion a bd y filtro en marca de vehiculo, arroja y llena el Modelo dropdown',
   'V1.01.17' : 'Conexion a bd y filtro final obtiene version',
   'V1.01.18' : 'botones de tipo vehiculos se aumenta borde al seleccionar',
+  'V1.01.19' : 'commit antes de agregar formName y getinfobyPostalCode php',
+
 }
  
