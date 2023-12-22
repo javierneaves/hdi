@@ -4,6 +4,7 @@ import { catalogYear } from "./catalogo.js";
 import { data } from "./formData.js";
 import { formDataRequired } from "./reqData.js";
 import { loadingEnd, loadingStart } from "./loading.js";
+import { showMessages } from "./showMessages.js";
 
 export function formAuto(formData) {
   loadingEnd();
@@ -423,12 +424,17 @@ export function formAuto(formData) {
 
     alert.textContent = "";
     alert.className = "";
-
+    
     if (e.target.value === "") {
       botonSiguiente.disabled = true;
     } else {
+      // Obten el valor de year y usalo para obtener las marcas de los vehiculos
+      const selectBrandToFilter = selectBrand.value;
+      const yearToFilter = selectYear.value;
+      const modelToFilter = selectModel.value;
+      const version = selectVersion.value
+    
       divBotones.appendChild(botonSiguiente);
-
       botonSiguiente.addEventListener("click", function (e) {
         if (selectVersion.value === "") {
           alert.textContent = "Favor de completar todos los campos!";
@@ -437,9 +443,8 @@ export function formAuto(formData) {
           return;
         }
         
-        getVehicleData(selectYear.value, selectBrand.value, selectModel.value, selectVersion.value)
-        formDataRequired(formData);
-        console.log(formData);
+        getVehicleData(tipoVehiculo, yearToFilter, selectBrandToFilter, modelToFilter, version, formData)
+        
       });
     }
   });
@@ -447,33 +452,39 @@ export function formAuto(formData) {
   
 }
 
-function getVehicleData(){
+function getVehicleData(tipoVehiculo, yearToFilter, selectBrandToFilter, modelToFilter, version, formData){
   // Consulta en la base de datos la version del vehiculo
-  fetch('phpRequest/getVersion.php?tipo=' + tipoVehiculo + '&modelo=' + yearToFilter + '&marca=' + selectBrandToFilter + '&armadora=' + modelToFilter)
+  fetch('phpRequest/getVehicleData.php?tipo=' + tipoVehiculo + '&modelo=' + yearToFilter + '&marca=' + selectBrandToFilter + '&armadora=' + modelToFilter + '&version=' + version )
   .then(response => response.json())
   .then(dataArray => {
     console.log('JSON obtenido:', dataArray);
     // Crear un conjunto para almacenar valores únicos de armadoraClave
-    const marcasUnicasSet = new Set();
+    const vehicleData = new Set();
 
     // Iterar sobre el dataArray y agregar valores únicos al conjunto
     dataArray.forEach(vehiculo => {
-      marcasUnicasSet.add(vehiculo.descripcionClave);
+      vehicleData.add(vehiculo);
     });
 
     // Convertir el conjunto a un array
-    const modelUnica = Array.from(marcasUnicasSet);
+    const modelUnica = Array.from(vehicleData);
 
     console.log('Armadoras únicos:', modelUnica);
 
-    // Puedes realizar más acciones con el array de marcas únicas aquí si es necesario
-    // Crear opciones y agregarlas al select
-    for (var i = 0; i < modelUnica.length; i++) {
-      var option = document.createElement("option");
-      option.textContent = modelUnica[i];
-      selectVersion.appendChild(option);
-    }    
+    // Guarda los datos obtenidos en formData
+    formData = {  
+      ...formData,
+      vehicleData: modelUnica,
+    }
+
+    // Ejecuta la siguiente funcion llevando los datos del formData
+    formDataRequired(formData);
+    
   })
-  .catch(error => console.error('Error:', error));
+  .catch(error => {
+    console.error('Error:', error)
+    loadingEnd()
+    showMessages('Ocurrio un error al obtener los datos del vehiculo', 'warning')  
+  });
 
 }
