@@ -3,7 +3,8 @@ import { formAuth } from './formAccount.js';
 import { formAuto } from './formAuto.js'
 import { loadingEnd, loadingStart } from './loading.js';
 import { showMessages } from './showMessages.js';
-
+import enviarObjetoAPHP from './getPackages.js';
+enviarObjetoAPHP()
 
 formName()
 

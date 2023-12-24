@@ -28,6 +28,7 @@ let versionObject = {
   'V1.01.20' : 'Se actualiza formName para que valide el cp en el servidor y se logra conexion con el web service para validar cp usando getinfobyPostalCode.php',
   'V1.01.21' : 'se agrega funcion handleErrors cuando el cp no es valido en el web service',
   'V1.01.22' : 'Agregar al formData los datos completos del vehiculo despues de dar siguiente en formAuto se crea getVehicleData.php',
+  'V1.01.23' : 'conexion a web service para obtener paquetes ya con los datos del vehiculo DESDE ARCHIVO PRUEBA',
 
 }
  

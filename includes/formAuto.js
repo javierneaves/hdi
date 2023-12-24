@@ -475,6 +475,7 @@ function getVehicleData(tipoVehiculo, yearToFilter, selectBrandToFilter, modelTo
     formData = {  
       ...formData,
       vehicleData: modelUnica,
+      idUso: '4596'
     }
 
     // Ejecuta la siguiente funcion llevando los datos del formData
