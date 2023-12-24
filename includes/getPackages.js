@@ -1,4 +1,6 @@
-export default function enviarObjetoAPHP(formData) {
+import { loadingEnd, loadingStart } from "./loading.js";
+
+export default function getPackages(formData) {
   // Crear una instancia de XMLHttpRequest
   var xhr = new XMLHttpRequest();
 
@@ -16,6 +18,7 @@ export default function enviarObjetoAPHP(formData) {
       if (xhr.readyState === 4 && xhr.status === 200) {
           // Manejar la respuesta del servidor (si es necesario)
           console.log(xhr.responseText);
+          loadingEnd()
       }
   };
 
@@ -23,7 +26,7 @@ export default function enviarObjetoAPHP(formData) {
   xhr.send(objetoJSON);
 }
 
-// Ejemplo de uso con el objeto proporcionado
+/* / Ejemplo de uso con el objeto proporcionado
 var formData = {
   "nombre": "dsfds",
   "cp": "64350",
@@ -130,7 +133,11 @@ var formData = {
   ],
   "idUso" : "4581"
 }
-
-enviarObjetoAPHP(formData);
+2089021
+3829
+2015
+4581
+// enviarObjetoAPHP(formData);
 
 // id de usos diferentes 4596, 4581(automoviles residenciales), 4584 (pick up comercial)
+*/

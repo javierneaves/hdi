@@ -5,6 +5,7 @@ import { data } from "./formData.js";
 import { formDataRequired } from "./reqData.js";
 import { loadingEnd, loadingStart } from "./loading.js";
 import { showMessages } from "./showMessages.js";
+import getPackages from "./getPackages.js";
 
 export function formAuto(formData) {
   loadingEnd();
@@ -206,7 +207,7 @@ export function formAuto(formData) {
   var botonSiguiente = document.createElement("button");
   botonSiguiente.setAttribute("type", "button");
   botonSiguiente.className = "btn btn-primary btn-lg m-2 disable";
-  botonSiguiente.textContent = "Siguiente";
+  botonSiguiente.textContent = "Obtener Paquetes";
 
   // Agregar el tercer div al formulario
   formulario.appendChild(divBotones);
@@ -425,25 +426,62 @@ export function formAuto(formData) {
     alert.textContent = "";
     alert.className = "";
     
+    // Obten el valor de year y usalo para obtener las marcas de los vehiculos
+    const selectBrandToFilter = selectBrand.value;
+    const yearToFilter = selectYear.value;
+    const modelToFilter = selectModel.value;
+    const version = selectVersion.value
+    
+    // Consulta en la base de datos la version del vehiculo
+    fetch('phpRequest/getVehicleData.php?tipo=' + tipoVehiculo + '&modelo=' + yearToFilter + '&marca=' + selectBrandToFilter + '&armadora=' + modelToFilter + '&version=' + version )
+    .then(response => response.json())
+    .then(dataArray => {
+      console.log('JSON obtenido:', dataArray);
+      // Crear un conjunto para almacenar valores únicos de armadoraClave
+      const vehicleData = new Set();
+
+      // Iterar sobre el dataArray y agregar valores únicos al conjunto
+      dataArray.forEach(vehiculo => {
+        vehicleData.add(vehiculo);
+      });
+
+      // Convertir el conjunto a un array
+      const modelUnica = Array.from(vehicleData);
+
+      console.log('Armadoras únicos:', modelUnica);
+
+      // Guarda los datos obtenidos en formData
+      formData = {  
+        ...formData,
+        vehicleData: modelUnica,
+        idUso: '4584'
+      }
+      
+    })
+    .catch(error => {
+      console.error('Error:', error)
+      loadingEnd()
+      showMessages('Ocurrio un error al obtener los datos del vehiculo', 'warning')  
+    });
+
     if (e.target.value === "") {
       botonSiguiente.disabled = true;
     } else {
-      // Obten el valor de year y usalo para obtener las marcas de los vehiculos
-      const selectBrandToFilter = selectBrand.value;
-      const yearToFilter = selectYear.value;
-      const modelToFilter = selectModel.value;
-      const version = selectVersion.value
     
       divBotones.appendChild(botonSiguiente);
+
       botonSiguiente.addEventListener("click", function (e) {
         if (selectVersion.value === "") {
           alert.textContent = "Favor de completar todos los campos!";
           alert.className = "alert alert-danger  mt-2";
           divBotones.appendChild(alert);
           return;
+        } else{
+          loadingStart()
+          // Ejecuta la siguiente funcion llevando los datos del formData
+          getPackages(formData)
         }
         
-        getVehicleData(tipoVehiculo, yearToFilter, selectBrandToFilter, modelToFilter, version, formData)
         
       });
     }
@@ -475,11 +513,8 @@ function getVehicleData(tipoVehiculo, yearToFilter, selectBrandToFilter, modelTo
     formData = {  
       ...formData,
       vehicleData: modelUnica,
-      idUso: '4596'
+      idUso: '4584'
     }
-
-    // Ejecuta la siguiente funcion llevando los datos del formData
-    formDataRequired(formData);
     
   })
   .catch(error => {
