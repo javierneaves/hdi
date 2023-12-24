@@ -21,12 +21,6 @@ function procesarDatos($data)
     $idTipoVehiculoClave = $vehicleDataArray['idTipoVehiculoClave'];
     $modeloLlave = $vehicleDataArray['modeloLlave'];
     
-    // Imprime el valor de las variables
-    echo $clave;
-    echo $idTipoVehiculoClave;
-    echo $modeloLlave;
-    echo $idUso;
-
     $json = file_get_contents('php://input');
     $datosArray = json_decode($json, true);
 

@@ -19,7 +19,8 @@ export default function getPackages(formData) {
       if (xhr.readyState === 4 && xhr.status === 200) {
           // Manejar la respuesta del servidor (si es necesario)
           // console.log(xhr.responseText);
-          setPackages(xhr.responseText)
+          var objetoJSON = JSON.parse(xhr.responseText);
+          setPackages(objetoJSON, formData)
       }
   };
 

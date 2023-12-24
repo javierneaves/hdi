@@ -202,3 +202,4 @@ function handleErrors(){
   showMessages('El codigo postal no es valido', 'warning')  
   loadingEnd();
 }
+

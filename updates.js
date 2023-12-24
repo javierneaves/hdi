@@ -31,6 +31,7 @@ let versionObject = {
   'V1.01.23' : 'conexion a web service para obtener paquetes ya con los datos del vehiculo DESDE ARCHIVO PRUEBA',
   'V1.01.24' : 'conexion a web service para obtener paquetes ya con los datos del vehiculo desde formAuto',
   'V1.01.25' : 'se envia el json del getPackages al setPackages',
+  'V1.01.26' : 'Se obtienen los paquetesCobertura en consola en setPackages',
   
 
 }
