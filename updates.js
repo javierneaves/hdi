@@ -30,6 +30,8 @@ let versionObject = {
   'V1.01.22' : 'Agregar al formData los datos completos del vehiculo despues de dar siguiente en formAuto se crea getVehicleData.php',
   'V1.01.23' : 'conexion a web service para obtener paquetes ya con los datos del vehiculo DESDE ARCHIVO PRUEBA',
   'V1.01.24' : 'conexion a web service para obtener paquetes ya con los datos del vehiculo desde formAuto',
+  'V1.01.25' : 'se envia el json del getPackages al setPackages',
+  
 
 }
  

@@ -1,4 +1,5 @@
 import { loadingEnd, loadingStart } from "./loading.js";
+import setPackages from "./setPackages.js";
 
 export default function getPackages(formData) {
   // Crear una instancia de XMLHttpRequest
@@ -17,8 +18,8 @@ export default function getPackages(formData) {
   xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
           // Manejar la respuesta del servidor (si es necesario)
-          console.log(xhr.responseText);
-          loadingEnd()
+          // console.log(xhr.responseText);
+          setPackages(xhr.responseText)
       }
   };
 

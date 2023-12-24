@@ -1,3 +1,6 @@
-export default function setPackages(formData) {
-  console.log(formData);
+import { loadingEnd } from "./loading.js";
+
+export default function setPackages(jsonObject) {
+  console.log(jsonObject);
+  loadingEnd()
 }
