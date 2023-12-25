@@ -32,6 +32,7 @@ let versionObject = {
   'V1.01.24' : 'conexion a web service para obtener paquetes ya con los datos del vehiculo desde formAuto',
   'V1.01.25' : 'se envia el json del getPackages al setPackages',
   'V1.01.26' : 'Se obtienen los paquetesCobertura en consola en setPackages',
+  'V1.01.27' : 'dise;o de paquetes y tabla de coberturas UI, actualizacion de color info en css de acuerdo a lineamientos de HDI',
   
 
 }

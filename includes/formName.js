@@ -3,6 +3,7 @@ import { formAuth } from './formAccount.js';
 import { formAuto } from './formAuto.js'
 import { loadingEnd, loadingStart } from './loading.js';
 import { showMessages } from './showMessages.js';
+import { formPackages } from './formPackages.js';
 
 formName()
 
@@ -203,3 +204,4 @@ function handleErrors(){
   loadingEnd();
 }
 
+formPackages()
