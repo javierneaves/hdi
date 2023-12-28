@@ -4,6 +4,7 @@ import { formAuto } from './formAuto.js'
 import { loadingEnd, loadingStart } from './loading.js';
 import { showMessages } from './showMessages.js';
 import { formPackages } from './formPackages.js';
+import getPackages from './getPackages.js';
 
 formName()
 
@@ -203,5 +204,5 @@ function handleErrors(){
   showMessages('El codigo postal no es valido', 'warning')  
   loadingEnd();
 }
-
-formPackages()
+getPackages()
+// formPackages() usalo para hacer pruebas al obtener el paquete

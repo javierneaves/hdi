@@ -3,6 +3,8 @@
 // Registra la ultima versión hecha commit
 
 let version = "v1.01.03"
+// netstat -ano | findstr :3306
+// taskkill /pid 5296 /f
 
 // Describe cada una de las versiones hechas commit
 let versionObject = {
@@ -33,6 +35,7 @@ let versionObject = {
   'V1.01.25' : 'se envia el json del getPackages al setPackages',
   'V1.01.26' : 'Se obtienen los paquetesCobertura en consola en setPackages',
   'V1.01.27' : 'dise;o de paquetes y tabla de coberturas UI, actualizacion de color info en css de acuerdo a lineamientos de HDI',
+  'V1.01.28' : 'Se actualiza getPackages.php y lo copie e hice 2 archivos para cada tipo de cobertura, getPackages se ejecuta desde el principio con datos de prueba, se ejecuta desde formName.js',
   
 
 }

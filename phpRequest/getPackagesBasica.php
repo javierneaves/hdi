@@ -82,8 +82,8 @@ function procesarDatos($data)
     <asmx:obtenerTodosPaquetes>false</asmx:obtenerTodosPaquetes>
     <asmx:paquetesConCambios>
     <asmx:PaqueteCoberturas>
-    <asmx:Clave>21</asmx:Clave>
-    <asmx:Descripcion>LIMITADA</asmx:Descripcion>
+    <asmx:Clave>22</asmx:Clave>
+    <asmx:Descripcion>BASICA</asmx:Descripcion>
     <asmx:Vigencia>
     <asmx:Inicial>2023-12-26</asmx:Inicial>
     <asmx:Final>2024-12-26</asmx:Final>
